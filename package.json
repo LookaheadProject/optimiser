@@ -1,0 +1,27 @@
+{
+  "name": "optimiser",
+  "version": "1.0.0",
+  "description": "Optimise timetabling to satisfy constraints",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LookaheadProject/optimiser.git"
+  },
+  "author": "LookaheadProject",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LookaheadProject/optimiser/issues"
+  },
+  "homepage": "https://github.com/LookaheadProject/optimiser#readme",
+  "devDependencies": {
+    "@types/node": "^20.12.4",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.3"
+  }
+}
