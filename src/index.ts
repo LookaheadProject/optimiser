@@ -5,6 +5,7 @@ import {
   Activity,
   ActivityType,
   Day,
+  ISubject
 } from "./structures";
 
 // The following are one example of each of the main structures from the schema
@@ -77,3 +78,6 @@ console.log(Activity1);
 console.log(Stream1);
 console.log(ActivityGroup1);
 console.log(Subject1);
+
+const statisticsSubject: ISubject = require("./example_subject.json");
+console.log(statisticsSubject);
