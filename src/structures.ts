@@ -17,7 +17,7 @@ export enum ActivityType {
 export type Time = [hour: number, minute: number];
 
 // A start and end Time pair
-type Times = [start: Time, end: Time];
+export type Times = [start: Time, end: Time];
 
 export interface IActivity {
   activity_type: ActivityType;
@@ -96,6 +96,7 @@ export interface ISubject {
   year: number;
   offering: string;
   activity_groups: ActivityGroup[];
+  cache: {};
 }
 
 export class Subject implements ISubject {
@@ -104,7 +105,7 @@ export class Subject implements ISubject {
   year: number;
   offering: string;
   activity_groups: ActivityGroup[];
-
+  cache: {};
   constructor(
     code: string,
     name: string,
@@ -117,28 +118,28 @@ export class Subject implements ISubject {
     this.year = year;
     this.offering = offering;
     this.activity_groups = activity_groups;
+    this.cache = {};
   }
 }
 
-// A Timetable is a collection of subjects with an allocation for one stream per
-//  ActivityGroup
-
-// This is what the evaluation function will take as an input.
-
+// No longer using Timetable. We are going to use subject and allocation as individual entities
 export interface ITimetable {
   subjects: Subject[];
   allocation: number[][];
 }
 
+export interface IAllocation {
+  allocation: number[][],
+}
+
 // A preference represents the user input - very unrefined
 
 export interface IPreferences {
-  timeRestrictionStart: Time;
-  timeRestrictionEnd: Time;
+  timeRestriction: Times;
   avoidDays: number[];
   minimiseClashes: boolean;
   skipLectures: boolean;
-  cramClasses: boolean;
+  minimiseDaysOnCampus: boolean;
   allocateBreaks: boolean;
-  streamedClasses: boolean;
+  minimiseBreaks: boolean;
 }
