@@ -14,10 +14,10 @@ export enum ActivityType {
 }
 
 // Time, specified in 24-hour time
-export type Time = [hour: number, minute: number];
+export type Time = {hour: number, minute: number};
 
-// A start and end Time pair
-export type Times = [start: Time, end: Time];
+// // A start and end Time pair
+export type Times = {start: Time, end: Time};
 
 export interface IActivity {
   activity_type: ActivityType;
@@ -95,7 +95,7 @@ export interface ISubject {
   name: string;
   year: number;
   offering: string;
-  activity_groups: ActivityGroup[];
+  activity_group_list: ActivityGroup[];
   cache: {};
 }
 
@@ -104,20 +104,20 @@ export class Subject implements ISubject {
   name: string;
   year: number;
   offering: string;
-  activity_groups: ActivityGroup[];
+  activity_group_list: ActivityGroup[];
   cache: {};
   constructor(
     code: string,
     name: string,
     year: number,
     offering: string,
-    activity_groups: ActivityGroup[]
+    activity_group_list: ActivityGroup[]
   ) {
     this.code = code;
     this.name = name;
     this.year = year;
     this.offering = offering;
-    this.activity_groups = activity_groups;
+    this.activity_group_list = activity_group_list;
     this.cache = {};
   }
 }

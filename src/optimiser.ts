@@ -14,8 +14,8 @@ import { ISubject, IAllocation, IPreferences, Time } from "./structures";
 // Helper Functions
 
 // returns number of hours time1 is after time2
-function timesDifference(time1: Time, time2: Time): number {
-  return time1[0] - time2[0] + (time1[1] - time2[1]) / 60;
+export function timesDifference(time1: Time, time2: Time): number {
+  return time1.hour - time2.hour + (time2.minute - time1.minute) / 60;
 }
 
 export function evaluate(
@@ -67,7 +67,7 @@ export function evaluate(
 
 
 // Still working on this function. 
-function minimiseClashesEval(
+export function minimiseClashesEval(
   subjects: ISubject[],
   allocation: IAllocation,
   preference: IPreferences
@@ -77,33 +77,84 @@ function minimiseClashesEval(
   // 1. Checking all pairwise activities 
   // 2. Recording in a structure and looking up
 
-  let classes = {};
+
+  // classes[i] represents the ith 15th minute slot of the week. 
+  // we use this is record class times and if a clash occurs. 
+
+  let activities = Array<number>(480).fill(0);
+
+  // activity_count represents the number of activites which are checked
+  // we use this is normalise the score at the end
+
+  let activity_count = 0;
+
+  // clash count represents the number of clashes this timetable has
+  let clash_count = 0;
 
   // interate i over number of subjects
   for (let i of Array.from(Array(subjects.length).keys())) {
 
     // iterate j over number of activity groups
     for (let j of Array.from(
-      Array(subjects[i].activity_groups.length).keys()
+      Array(subjects[i].activity_group_list.length).keys()
     )) {
 
       // identify the stream for this activity group from allocation
-      let stream = subjects[i].activity_groups[j].stream_list[allocation[i][j]];
+      let stream = subjects[i].activity_group_list[j].stream_list[allocation.allocation[i][j]];
 
       // iterate over all activities in the stream
       for (let k of Array.from(Array(stream.activity_list.length).keys())) {
         let activity = stream.activity_list[k];
+
+        // if the activity is a tutorial or we don't skip lectures record this class
+
+        if (activity.activity_type || !preference.skipLectures) {
+
+          // we set clash to 0. If a clash is found we add 1 to the clash_count
+          let clash = 0;
+
+          activity_count = activity_count + 1;
+
+          // find the 15th minute slot the activity starts
+          let start = 96 * activity.day + 4 * activity.times.start.hour + activity.times.start.minute
+
+          // determine how many 15 minute slots the activity takes us 
+          let duration = timesDifference(activity.times.end, activity.times.start) * 4;
+
+          // iterate over the 15 minute slots 
+          for (let t = start; t < start + duration; t++) {
+            
+            // record if there is a clash 
+            if (activities[t]) {
+              clash = 1;
+            }
+
+            // record that this class has occured
+            activities[t] = 1;
+          }
+
+          // record if a clash occured only once
+
+          if (clash) {
+            clash_count = clash_count + 1;
+          }
+          
+        }
 
 
       }
     }
   }
 
-  return 0;
+  // normalisation
+
+  let maximum_clashes = activity_count - 1;
+
+  return 1 - clash_count / maximum_clashes;
 }
 
 
-function minimiseDaysOnCampusEval(
+export function minimiseDaysOnCampusEval(
   subjects: ISubject[],
   allocation: IAllocation,
   preference: IPreferences
@@ -116,11 +167,11 @@ function minimiseDaysOnCampusEval(
 
     // iterate j over number of activity groups
     for (let j of Array.from(
-      Array(subjects[i].activity_groups.length).keys()
+      Array(subjects[i].activity_group_list.length).keys()
     )) {
 
       // find the stream for this activity group from allocation
-      let stream = subjects[i].activity_groups[j].stream_list[allocation[i][j]];
+      let stream = subjects[i].activity_group_list[j].stream_list[allocation.allocation[i][j]];
 
       // iterate over all activities in the stream
       for (let k of Array.from(Array(stream.activity_list.length).keys())) {
@@ -147,12 +198,103 @@ function minimiseDaysOnCampusEval(
 
 // Idea
 // peanalised for having breaks between classes
-function minimiseBreaksEval(
+export function minimiseBreaksEval(
   subjects: ISubject[],
   allocation: IAllocation,
   preference: IPreferences
 ): number {
-  return 0;
+
+  // this is a constant that we can change
+  // break_length is the number of consecutive 15 minute periods in a break
+  let break_length = 4;
+
+  // activities represents the 15 minutes slots of the work week
+  let activities = Array<number>(480).fill(0);
+
+  // activity_count represents the number of activites which are checked
+  // we use this is normalise the score at the end
+
+  let activity_count = 0;
+
+  // break count represents the number of breaks this timetable has in between classes
+  let break_count = 0;
+
+  // interate i over number of subjects
+  for (let i of Array.from(Array(subjects.length).keys())) {
+
+    // iterate j over number of activity groups
+    for (let j of Array.from(
+      Array(subjects[i].activity_group_list.length).keys()
+    )) {
+
+      // identify the stream for this activity group from allocation
+      let stream = subjects[i].activity_group_list[j].stream_list[allocation.allocation[i][j]];
+
+      // iterate over all activities in the stream
+      for (let k of Array.from(Array(stream.activity_list.length).keys())) {
+        let activity = stream.activity_list[k];
+
+        // if the activity is a tutorial or we don't skip lectures record this class
+
+        if (activity.activity_type || !preference.skipLectures) {
+
+          activity_count = activity_count + 1;
+
+          // find the 15th minute slot the activity starts
+          let start = 96 * activity.day + 4 * activity.times.start.hour + activity.times.start.minute;
+
+          // determine how many 15 minute slots the activity takes us 
+          let duration = timesDifference(activity.times.end, activity.times.start) * 4;
+
+          // iterate over the 15 minute slots 
+          for (let t = start; t < start + duration; t++) {
+
+            // record that this class has occured in the tth 15th minute slot
+            activities[t] = 1;
+          }
+          
+        }
+
+
+      }
+    }
+  }
+
+  // possibly create a helper function for this
+  // calculate the number of breaks 
+
+  // a break is defined as a break_length or more 15 minute blocks between two 
+  // activities on the same day 
+
+  let sub_breaks = 0;
+  let activity_occured = 0;
+
+  // iterate i over 15 minute slots of each day  
+  for (let i = 0; i < 480; i++) {
+
+    if (activities[i] && sub_breaks >= break_length) {
+
+      if (!activity_occured) {
+        activity_occured = 1;
+      } else {
+        break_count++;
+      }
+
+      sub_breaks = 0;
+    
+    } else {
+      sub_breaks++;
+    }
+  }
+  // normalisation
+
+  // here we let maximum_breaks be the number of breaks inbetween activities if they all 
+  // occured on the same day and there is a break between then all
+  
+  
+  let maximum_breaks = activity_count - 1;
+
+  return 1 - break_count / maximum_breaks;
 }
 
 
@@ -161,16 +303,100 @@ function minimiseBreaksEval(
 // Idea 
 // pealise for not having breaks between classes
 
-function allocateBreaksEval(
+export function allocateBreaksEval(
   subjects: ISubject[],
   allocation: IAllocation,
   preference: IPreferences
 ): number {
-  return 0;
+  // this is a constant that we can change
+  // break_length is the number of consecutive 15 minute periods in a break
+  let break_length = 4;
+
+  // activities represents the 15 minutes slots of the work week
+  let activities = Array<number>(480).fill(0);
+
+  // activity_count represents the number of activites which are checked
+  // we use this is normalise the score at the end
+
+  let activity_count = 0;
+
+  // break count represents the number of breaks this timetable has in between classes
+  let break_count = 0;
+
+  // interate i over number of subjects
+  for (let i of Array.from(Array(subjects.length).keys())) {
+
+    // iterate j over number of activity groups
+    for (let j of Array.from(
+      Array(subjects[i].activity_group_list.length).keys()
+    )) {
+
+      // identify the stream for this activity group from allocation
+      let stream = subjects[i].activity_group_list[j].stream_list[allocation.allocation[i][j]];
+
+      // iterate over all activities in the stream
+      for (let k of Array.from(Array(stream.activity_list.length).keys())) {
+        let activity = stream.activity_list[k];
+
+        // if the activity is a tutorial or we don't skip lectures record this class
+
+        if (activity.activity_type || !preference.skipLectures) {
+
+          activity_count = activity_count + 1;
+
+          // find the 15th minute slot the activity starts
+          let start = 96 * activity.day + 4 * activity.times.start.hour + activity.times.start.minute;
+
+          // determine how many 15 minute slots the activity takes us 
+          let duration = timesDifference(activity.times.end, activity.times.start) * 4;
+
+          // iterate over the 15 minute slots 
+          for (let t = start; t < start + duration; t++) {
+
+            // record that this class has occured in the tth 15th minute slot
+            activities[t] = 1;
+          }
+          
+        }
+      }
+    }
+  }
+
+  // calculate the number of breaks between activities of length break_length or more 
+
+  let counter = 0;
+  let sub_breaks = 0;
+  let activity_occured = 0;
+  
+  // iterate i over 15 minute slots of each day  
+  for (let i = 0; i < 480; i++) {
+
+    if (activities[i] && sub_breaks >= break_length) {
+
+      if (!activity_occured) {
+        activity_occured = 1;
+      } else {
+        break_count++;
+      }
+
+      sub_breaks = 0;
+    
+    } else {
+      sub_breaks++;
+    }
+  }
+
+  // normalisation
+
+  // maximum breaks occurs when there is a break between every activity 
+
+  let maximum_breaks = activity_count - 1;
+
+  return break_count / maximum_breaks;
 }
 
 
-function timeRestrictionEval(
+export function timeRestrictionEval(
   subjects: ISubject[],
   allocation: IAllocation,
   preference: IPreferences
@@ -185,11 +411,11 @@ function timeRestrictionEval(
 
     // iterate j over activity groups
     for (let j of Array.from(
-      Array(subjects[i].activity_groups.length).keys()
+      Array(subjects[i].activity_group_list.length).keys()
     )) {
 
       // find the stream for this activity group from allocation
-      let stream = subjects[i].activity_groups[j].stream_list[allocation[i][j]];
+      let stream = subjects[i].activity_group_list[j].stream_list[allocation.allocation[i][j]];
 
       // iterate over all activities in the stream
       for (let k of Array.from(Array(stream.activity_list.length).keys())) {
@@ -209,10 +435,10 @@ function timeRestrictionEval(
         if (activity.activity_type || !preference.skipLectures) {
 
           // find the maximum deviation of the class from time restrictions.
-          let activity_start = activity.times[0];
-          let activity_end = activity.times[1];
-          let restriction_start = preference.timeRestriction[0];
-          let restriction_end = preference.timeRestriction[1];
+          let activity_start = activity.times.start;
+          let activity_end = activity.times.end;
+          let restriction_start = preference.timeRestriction.start;
+          let restriction_end = preference.timeRestriction.end;
 
           let start_deviation = Math.max(
             timesDifference(restriction_start, activity_start),
@@ -241,8 +467,8 @@ function timeRestrictionEval(
 
   // Determine if the largest possible deviation is from having a class at 8 am or 10 pm
 
-  let start_deviation = timesDifference(preference.timeRestriction[0], [8, 0]);
-  let end_deviation = timesDifference([10, 0], preference.timeRestriction[1]);
+  let start_deviation = timesDifference(preference.timeRestriction.start, {hour: 8, minute: 0});
+  let end_deviation = timesDifference({hour: 10, minute: 0}, preference.timeRestriction.end);
   
   let max_deviation = Math.max(start_deviation, end_deviation);
 
@@ -259,7 +485,7 @@ function timeRestrictionEval(
 }
 
 
-function avoidDaysEval(
+export function avoidDaysEval(
   subjects: ISubject[],
   allocation: IAllocation,
   preference: IPreferences
@@ -271,11 +497,11 @@ function avoidDaysEval(
 
     // iterate j over activity groups
     for (let j of Array.from(
-      Array(subjects[i].activity_groups.length).keys()
+      Array(subjects[i].activity_group_list.length).keys()
     )) {
 
       // find the stream for this activity group from allocation
-      let stream = subjects[i].activity_groups[j].stream_list[allocation[i][j]];
+      let stream = subjects[i].activity_group_list[j].stream_list[allocation.allocation[i][j]];
 
       // iterate over all activities in the stream
       for (let k of Array.from(Array(stream.activity_list.length).keys())) {
