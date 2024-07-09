@@ -1,558 +1,185 @@
-import { ISubject, IAllocation, IPreferences, Time } from "./structures";
+import { Ioptimiser, Ievaluator, ISubject, IAllocation, IPreferences } from "./structures";
 
-// parameters
-// 1. list of subjects
-// 2. preferences
-// 3. algorithm
-// 4. evaluation function
 
-// export function optimise(subjects: ISubject[], preferences: IPreferences): IAllocation[] {
+export function generateStreamCombinations(subject: ISubject): number[][] {
+  let streamCombinations: number[][][] = [[], [[]]];
+  let index = 0;
+  let otherIndex = (index + 1) % 2;
 
-// }
+  let numActivityGroups = subject.activity_group_list.length;
 
-// Helper Functions
+  
+  // if there are no activity groups there are no stream combinations
+  if (!numActivityGroups) {
+    return streamCombinations[index];
+  }
 
-// returns number of hours time1 is after time2
-export function timesDifference(time1: Time, time2: Time): number {
-  return time1.hour - time2.hour + (time2.minute - time1.minute) / 60;
+  // iterate across all subjects
+
+  for (let i = 0; i < subject.activity_group_list.length; i++) {
+
+    // For each stream combination of previous subjects add a new combination 
+    // for each stream in the new activity group 
+
+    while (streamCombinations[otherIndex].length > 0) {
+
+      let subject_group = subject.activity_group_list[i];
+
+      // if there are no streams for this activity group then there are 
+      // no possible combinations
+
+      if (!subject_group.stream_list.length) {
+        return [];
+      }
+
+      let base = streamCombinations[otherIndex].pop();
+
+      for (let j = 0; j < subject_group.stream_list.length; j++) {
+
+        
+        base.push(j);
+        streamCombinations[index].push(base.slice());
+        base.pop();
+      }
+    }
+
+    index = otherIndex;
+    otherIndex = (otherIndex + 1) % 2;
+    
+  }
+
+  return streamCombinations[otherIndex];
 }
 
-export function consolidatedEvaluate(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preferences: IPreferences
-): number {
-  // things we can change
-  const minute_block = 15; // must be divisor of 60
-  const break_minutes = 60;
+export function generateAllocations(subjects: ISubject[]): IAllocation[] {
 
-  // dont change these
-  const day_minutes = 24 * 60;
-  const hour_blocks = 60 / minute_block;
-  const day_blocks = day_minutes / minute_block;
-  const week_blocks = day_blocks * 5;
-  const break_length = break_minutes / minute_block;
+  let allocations : IAllocation[] = [];
+  let numSubjects = subjects.length;
 
-  let activities = Array<number>(week_blocks).fill(0);
-  let score = 0;
-  let restrictionScore = 0;
-  let evalContributors = 2;
-  let activity_count = 0;
-  let clash_count = 0;
-  let days = Array<number>(5).fill(0);
+  let allocationList: number[][][][] = [[], [[]]];
+  let index = 0;
+  let otherIndex = (index + 1) % 2;
 
-  for (let i = 0; i < subjects.length; i++) {
+  // if there are no subjects then there are no allocations
+  if (!numSubjects) {
+    return allocations;
+  }
+
+
+
+  for (let i = 0; i < numSubjects; i++) {
+
     let subject = subjects[i];
 
-    for (let j = 0; j < subjects[i].activity_group_list.length; j++) {
-      let activity_group = subject.activity_group_list[j];
-      let stream = activity_group.stream_list[allocation.allocation[i][j]];
+    let streams = generateStreamCombinations(subject);
 
-      for (let k = 0; k < stream.activity_list.length; k++) {
-        let activity = stream.activity_list[k];
+    // if there are no stream combinations for this subject, then 
+    // there are to allocations 
 
-        // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preferences.skipLectures) {
-          // record the number of activities processes for normalisation
-          activity_count = activity_count + 1;
-
-          // record which days activities occur
-          days[stream.activity_list[k].day] = 1;
-
-          // find the maximum deviation of the class from time restrictions.
-          let activity_start = activity.times.start;
-          let activity_end = activity.times.end;
-          let restriction_start = preferences.timeRestriction.start;
-          let restriction_end = preferences.timeRestriction.end;
-
-          let start_deviation = Math.max(
-            timesDifference(restriction_start, activity_start),
-            timesDifference(activity_start, restriction_end)
-          );
-
-          let end_deviation = Math.max(
-            timesDifference(restriction_start, activity_end),
-            timesDifference(activity_end, restriction_end)
-          );
-
-          let deviation = Math.max(start_deviation, end_deviation, 0);
-
-          restrictionScore = restrictionScore + deviation ** 2;
-
-          // determine determine if this activity clashes
-          let clash = 0;
-
-          // activity minute_block start index and duration
-          let start =
-            day_blocks * activity.day +
-            hour_blocks * activity.times.start.hour +
-            activity.times.start.minute;
-          let duration =
-            timesDifference(activity.times.end, activity.times.start) *
-            hour_blocks;
-
-          for (let t = start; t < start + duration; t++) {
-            // record if there is a clash in minute block t
-            if (activities[t]) {
-              clash = 1;
-            }
-
-            // record that an activity occured in minute block t
-            activities[t] = 1;
-          }
-
-          if (clash) {
-            clash_count = clash_count + 1;
-          }
-        }
-      }
-    }
-  }
-
-  // Adding scores based on preferences
-
-  if (preferences.minimiseClashes) {
-    score = score + 1 - clash_count / (activity_count - 1);
-    evalContributors++;
-  }
-
-  if (preferences.minimiseDaysOnCampus) {
-    score = score + 1;
-
-    for (let num of days) {
-      score -= 0.2 * num;
+    if (!streams.length) {
+      return [];
     }
 
-    evalContributors++;
-  }
+    // for allocation of previous subjects add a new allocation with all
+    // stream combinations of this subject 
 
-  if (preferences.minimiseBreaks || preferences.allocateBreaks) {
-    let sub_breaks = 0;
-    let activity_occured = 0;
-    let break_count = 0;
+    while (allocationList[otherIndex].length > 0) {
 
-    // find number of breaks between classes in the week
-    for (let i = 0; i < week_blocks; i++) {
-      if (activities[i] && sub_breaks >= break_length) {
-        if (!activity_occured) {
-          activity_occured = 1;
-        } else {
-          break_count++;
-        }
+      let allocation = allocationList[otherIndex].pop();
 
-        sub_breaks = 0;
-      } else {
-        sub_breaks++;
+
+      for (let j = 0; j < streams.length; j++) {
+        allocation.push(streams[j]);
+
+        allocationList[index].push(allocation.slice());
+        allocation.pop();
       }
     }
 
-    if (preferences.minimiseBreaks) {
-      score = score + 1 - break_count / (activity_count - 1);
-      evalContributors++;
-    }
+    index = otherIndex;
+    otherIndex = (otherIndex + 1) % 2;
 
-    if (preferences.allocateBreaks) {
-      score = score + break_count / (activity_count - 1);
-      evalContributors++;
-    }
+
   }
 
-  // adding timeRestiction score
+  // create allocations 
 
-  // finding maximum deviation for a day
-  let start_deviation = timesDifference(preferences.timeRestriction.start, {
-    hour: 8,
-    minute: 0,
-  });
-  let end_deviation = timesDifference(
-    { hour: 10, minute: 0 },
-    preferences.timeRestriction.end
-  );
-  let max_deviation = Math.max(start_deviation, end_deviation);
-
-  score = score + 1 - restrictionScore / (activity_count * max_deviation ** 2);
-
-  // adding avoidDays score
-  score = score + 1;
-
-  let day_weight = 1 / preferences.avoidDays.length;
-
-  for (let day of preferences.avoidDays) {
-    score -= day_weight * days[day];
+  for (let allocation of allocationList[otherIndex]) {
+    allocations.push({allocation: allocation})
   }
 
-  return score / evalContributors;
+  return allocations;
+
 }
 
-export function evaluate(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preferences: IPreferences
-): number {
-  let score = 0;
-  let evalContributors = 2;
 
-  if (preferences.minimiseClashes) {
-    score = score + minimiseClashesEval(subjects, allocation, preferences);
-    evalContributors++;
+
+// implementation of Fisher-Yates Shuffle 
+
+export function shuffle(allocations: IAllocation[], size?: number ): IAllocation[] {
+  let length = allocations.length;
+
+  let items = length;
+
+  if (typeof(size) !== 'undefined' && size > -1) {
+    items = Math.min(size, length);
   }
 
-  if (preferences.minimiseDaysOnCampus) {
-    score = score + minimiseDaysOnCampusEval(subjects, allocation, preferences);
-    evalContributors++;
+  for (let i = length - 1; i >= length - items; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+
+    let temp = allocations[j];
+    allocations[j] = allocations[i];
+    allocations[i] = temp;
   }
 
-  if (preferences.minimiseBreaks) {
-    score = score + minimiseBreaksEval(subjects, allocation, preferences);
-    evalContributors++;
-  }
-
-  if (preferences.allocateBreaks) {
-    score = score + allocateBreaksEval(subjects, allocation, preferences);
-    evalContributors++;
-  }
-
-  score = score + timeRestrictionEval(subjects, allocation, preferences);
-
-  score = score + avoidDaysEval(subjects, allocation, preferences);
-
-  return score / evalContributors;
+  return allocations.slice(length - items, length);
 }
 
-export function minimiseClashesEval(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preference: IPreferences
-): number {
-  // can change this number. Must be a divisor of 60
-  const minute_block = 15;
+// 
 
-  const day_minutes = 24 * 60;
-  const hour_blocks = 60 / minute_block;
-  const day_blocks = day_minutes / minute_block;
-  const week_blocks = day_blocks * 5;
+export function optimise(subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator, algorithm: Ioptimiser): IAllocation[] {
+  const allocationCutoff = 10000;
 
-  let activities = Array<number>(week_blocks).fill(0);
-  let activity_count = 0;
-  let clash_count = 0;
+  let allocations = generateAllocations(subjects);
 
-  for (let i = 0; i < subjects.length; i++) {
-    let subject = subjects[i];
-
-    for (let j = 0; j < subjects[i].activity_group_list.length; j++) {
-      let activity_group = subject.activity_group_list[j];
-      let stream = activity_group.stream_list[allocation.allocation[i][j]];
-
-      for (let k = 0; k < stream.activity_list.length; k++) {
-        let activity = stream.activity_list[k];
-
-        // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preference.skipLectures) {
-          activity_count = activity_count + 1;
-
-          let clash = 0;
-
-          // activity minute_block start index and duration
-          let start =
-            day_blocks * activity.day +
-            hour_blocks * activity.times.start.hour +
-            activity.times.start.minute;
-          let duration =
-            timesDifference(activity.times.end, activity.times.start) *
-            hour_blocks;
-
-          for (let t = start; t < start + duration; t++) {
-            // record if there is a clash in minute block t
-            if (activities[t]) {
-              clash = 1;
-            }
-
-            // record that an activity occured in minute block t
-            activities[t] = 1;
-          }
-
-          if (clash) {
-            clash_count = clash_count + 1;
-          }
-        }
-      }
-    }
+  // if there are more allocations than the given cutoff then take 
+  // a random subject of size allocationCutoff
+  if (allocations.length > allocationCutoff) {
+    allocations = shuffle(allocations, allocationCutoff);
   }
 
-  return 1 - clash_count / activity_count - 1;
+  // sort and return 
+
+  let sortedAllocations = algorithm(allocations, subjects, preferences, evaluation);
+
+  return sortedAllocations;
 }
 
-export function minimiseDaysOnCampusEval(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preference: IPreferences
-): number {
-  let score = 1;
-  let days = Array<number>(5).fill(0);
+// Idea is that first we map each allocation to the pair of the allocation and it's score. Then we sort these pairs based on the 
+// scores. Then we map the sorted array back to just allocations.
 
-  for (let i = 0; i < subjects.length; i++) {
-    let subject = subjects[i];
+export function sortOptimsation(allocations: IAllocation[], subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator): IAllocation[] {
+  let pairs = allocations.map(x => pair(x, subjects, preferences, evaluation));
+  
+  console.log("One");
+  console.dir(pairs, { depth: null });
 
-    for (let j = 0; j < subject.activity_group_list.length; j++) {
-      let activity_group = subject.activity_group_list[j];
-      let stream = activity_group.stream_list[allocation.allocation[i][j]];
+  pairs.sort((a, b) => a[1] - b[1]);
 
-      for (let k = 0; k < stream.activity_list.length; k++) {
-        // only record if activity is tutorial or we don't skip tutorials
-        if (stream.activity_list[k].activity_type || !preference.skipLectures) {
-          days[stream.activity_list[k].day] = 1;
-        }
-      }
-    }
-  }
-  // subtract 0.2 for each day on campus
-  for (let num of days) {
-    score -= 0.2 * num;
-  }
+  console.log("Two");
+  console.dir(pairs, { depth: null });
 
-  return score;
+  let sortedAllocations = pairs.map(a => a[0]);
+  sortedAllocations.reverse();
+
+  console.log("Three");
+  console.dir(sortedAllocations, { depth: null });
+
+  return sortedAllocations;
 }
 
-export function minimiseBreaksEval(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preference: IPreferences
-): number {
-  // things we can change
-  const minute_block = 15; // must be divisor of 60
-  const break_minutes = 60;
 
-  // dont change these
-  const day_minutes = 24 * 60;
-  const hour_blocks = 60 / minute_block;
-  const day_blocks = day_minutes / minute_block;
-  const week_blocks = day_blocks * 5;
-  const break_length = break_minutes / minute_block;
-
-  let activities = Array<number>(week_blocks).fill(0);
-  let activity_count = 0;
-  let break_count = 0;
-
-  for (let i = 0; i < subjects.length; i++) {
-    let subject = subjects[i];
-
-    for (let j = 0; j < subject.activity_group_list.length; j++) {
-      let activity_group = subject.activity_group_list[j];
-      let stream = activity_group.stream_list[allocation.allocation[i][j]];
-
-      for (let k = 0; k < stream.activity_list.length; k++) {
-        let activity = stream.activity_list[k];
-
-        if (activity.activity_type || !preference.skipLectures) {
-          activity_count = activity_count + 1;
-
-          // activity minute_block start index and duration
-          let start =
-            day_blocks * activity.day +
-            hour_blocks * activity.times.start.hour +
-            activity.times.start.minute;
-          let duration =
-            timesDifference(activity.times.end, activity.times.start) *
-            hour_blocks;
-
-          // record that an activity occured in minute block t
-          for (let t = start; t < start + duration; t++) {
-            activities[t] = 1;
-          }
-        }
-      }
-    }
-  }
-
-  let sub_breaks = 0;
-  let activity_occured = 0;
-
-  // iterate i over minute blocks
-  for (let i = 0; i < week_blocks; i++) {
-    if (activities[i] && sub_breaks >= break_length) {
-      if (!activity_occured) {
-        activity_occured = 1;
-      } else {
-        break_count++;
-      }
-
-      sub_breaks = 0;
-    } else {
-      sub_breaks++;
-    }
-  }
-  return 1 - break_count / activity_count;
-}
-
-// Still working on this function
-
-// Idea
-// pealise for not having breaks between classes
-
-export function allocateBreaksEval(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preference: IPreferences
-): number {
-  // things we can change
-  const minute_block = 15; // must be divisor of 60
-  const break_minutes = 60;
-
-  // dont change these
-  const day_minutes = 24 * 60;
-  const hour_blocks = 60 / minute_block;
-  const day_blocks = day_minutes / minute_block;
-  const week_blocks = day_blocks * 5;
-  const break_length = break_minutes / minute_block;
-
-  let activities = Array<number>(week_blocks).fill(0);
-  let activity_count = 0;
-  let break_count = 0;
-
-  for (let i = 0; i < subjects.length; i++) {
-    let subject = subjects[i];
-
-    for (let j = 0; j < subject.activity_group_list.length; j++) {
-      let activity_group = subject.activity_group_list[j];
-      let stream = activity_group.stream_list[allocation.allocation[i][j]];
-
-      for (let k = 0; k < stream.activity_list.length; k++) {
-        let activity = stream.activity_list[k];
-
-        if (activity.activity_type || !preference.skipLectures) {
-          activity_count = activity_count + 1;
-
-          // activity minute_block start index and duration
-          let start =
-            day_blocks * activity.day +
-            hour_blocks * activity.times.start.hour +
-            activity.times.start.minute;
-          let duration =
-            timesDifference(activity.times.end, activity.times.start) *
-            hour_blocks;
-
-          // record that an activity occured in minute block t
-          for (let t = start; t < start + duration; t++) {
-            activities[t] = 1;
-          }
-        }
-      }
-    }
-  }
-
-  let sub_breaks = 0;
-  let activity_occured = 0;
-
-  // iterate i over minute blocks
-  for (let i = 0; i < week_blocks; i++) {
-    if (activities[i] && sub_breaks >= break_length) {
-      if (!activity_occured) {
-        activity_occured = 1;
-      } else {
-        break_count++;
-      }
-
-      sub_breaks = 0;
-    } else {
-      sub_breaks++;
-    }
-  }
-  return break_count / activity_count;
-}
-
-export function timeRestrictionEval(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preference: IPreferences
-): number {
-  let score = 0;
-  let activity_count = 0;
-
-  for (let i = 0; i < subjects.length; i++) {
-    let subject = subjects[i];
-
-    for (let j = 0; j < subject.activity_group_list.length; j++) {
-      let activity_group = subject.activity_group_list[j];
-      let stream = activity_group.stream_list[allocation.allocation[i][j]];
-
-      for (let k = 0; k < stream.activity_list.length; k++) {
-        let activity = stream.activity_list[k];
-
-        // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preference.skipLectures) {
-          activity_count = activity_count + 1;
-
-          // find the maximum deviation of the class from time restrictions.
-          let activity_start = activity.times.start;
-          let activity_end = activity.times.end;
-          let restriction_start = preference.timeRestriction.start;
-          let restriction_end = preference.timeRestriction.end;
-
-          let start_deviation = Math.max(
-            timesDifference(restriction_start, activity_start),
-            timesDifference(activity_start, restriction_end)
-          );
-
-          let end_deviation = Math.max(
-            timesDifference(restriction_start, activity_end),
-            timesDifference(activity_end, restriction_end)
-          );
-
-          let deviation = Math.max(start_deviation, end_deviation, 0);
-
-          score = score + deviation ** 2;
-        }
-      }
-    }
-  }
-
-  // finding maximum deviation for a day
-  let start_deviation = timesDifference(preference.timeRestriction.start, {
-    hour: 8,
-    minute: 0,
-  });
-  let end_deviation = timesDifference(
-    { hour: 10, minute: 0 },
-    preference.timeRestriction.end
-  );
-  let max_deviation = Math.max(start_deviation, end_deviation);
-
-  return 1 - score / (activity_count * max_deviation ** 2);
-}
-
-export function avoidDaysEval(
-  subjects: ISubject[],
-  allocation: IAllocation,
-  preference: IPreferences
-): number {
-  let score = 1;
-  let days = Array<number>(5).fill(0);
-
-  for (let i = 0; i < subjects.length; i++) {
-    let subject = subjects[i];
-
-    for (let j = 0; j < subject.activity_group_list.length; j++) {
-      let activity_group = subject.activity_group_list[j];
-
-      let stream = activity_group.stream_list[allocation.allocation[i][j]];
-
-      for (let k = 0; k < stream.activity_list.length; k++) {
-        // set record which day the activity is on
-
-        // if the class is a tutorial or we don't skip lectures then record the day
-        if (stream.activity_list[k].activity_type || !preference.skipLectures) {
-          // record which days activities occur
-          days[stream.activity_list[k].day] = 1;
-        }
-      }
-    }
-  }
-
-  let day_weight = 1 / preference.avoidDays.length;
-
-  for (let day of preference.avoidDays) {
-    score -= day_weight * days[day];
-  }
-
-  return score;
+function pair(allocation: IAllocation, subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator): [IAllocation, number] {
+  return [allocation, evaluation(subjects, allocation, preferences)];
 }

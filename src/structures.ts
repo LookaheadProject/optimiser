@@ -143,3 +143,11 @@ export interface IPreferences {
   allocateBreaks: boolean;
   minimiseBreaks: boolean;
 }
+
+export interface Ievaluator {
+  (subjects: ISubject[], allocation: IAllocation, preferences: IPreferences): number;
+}
+
+export interface Ioptimiser {
+  (allocations: IAllocation[], subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator): IAllocation[]; 
+}
