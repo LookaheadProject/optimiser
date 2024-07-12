@@ -1,5 +1,10 @@
-import { Ioptimiser, Ievaluator, ISubject, IAllocation, IPreferences } from "./structures";
-
+import {
+  Ioptimiser,
+  Ievaluator,
+  ISubject,
+  IAllocation,
+  IPreferences,
+} from "./structures";
 
 export function generateStreamCombinations(subject: ISubject): number[][] {
   let streamCombinations: number[][][] = [[], [[]]];
@@ -8,7 +13,6 @@ export function generateStreamCombinations(subject: ISubject): number[][] {
 
   let numActivityGroups = subject.activity_group_list.length;
 
-  
   // if there are no activity groups there are no stream combinations
   if (!numActivityGroups) {
     return streamCombinations[index];
@@ -17,15 +21,13 @@ export function generateStreamCombinations(subject: ISubject): number[][] {
   // iterate across all subjects
 
   for (let i = 0; i < subject.activity_group_list.length; i++) {
-
-    // For each stream combination of previous subjects add a new combination 
-    // for each stream in the new activity group 
+    // For each stream combination of previous subjects add a new combination
+    // for each stream in the new activity group
 
     while (streamCombinations[otherIndex].length > 0) {
-
       let subject_group = subject.activity_group_list[i];
 
-      // if there are no streams for this activity group then there are 
+      // if there are no streams for this activity group then there are
       // no possible combinations
 
       if (!subject_group.stream_list.length) {
@@ -35,8 +37,6 @@ export function generateStreamCombinations(subject: ISubject): number[][] {
       let base = streamCombinations[otherIndex].pop();
 
       for (let j = 0; j < subject_group.stream_list.length; j++) {
-
-        
         base.push(j);
         streamCombinations[index].push(base.slice());
         base.pop();
@@ -45,15 +45,13 @@ export function generateStreamCombinations(subject: ISubject): number[][] {
 
     index = otherIndex;
     otherIndex = (otherIndex + 1) % 2;
-    
   }
 
   return streamCombinations[otherIndex];
 }
 
 export function generateAllocations(subjects: ISubject[]): IAllocation[] {
-
-  let allocations : IAllocation[] = [];
+  let allocations: IAllocation[] = [];
   let numSubjects = subjects.length;
 
   let allocationList: number[][][][] = [[], [[]]];
@@ -65,28 +63,23 @@ export function generateAllocations(subjects: ISubject[]): IAllocation[] {
     return allocations;
   }
 
-
-
   for (let i = 0; i < numSubjects; i++) {
-
     let subject = subjects[i];
 
     let streams = generateStreamCombinations(subject);
 
-    // if there are no stream combinations for this subject, then 
-    // there are to allocations 
+    // if there are no stream combinations for this subject, then
+    // there are to allocations
 
     if (!streams.length) {
       return [];
     }
 
     // for allocation of previous subjects add a new allocation with all
-    // stream combinations of this subject 
+    // stream combinations of this subject
 
     while (allocationList[otherIndex].length > 0) {
-
       let allocation = allocationList[otherIndex].pop();
-
 
       for (let j = 0; j < streams.length; j++) {
         allocation.push(streams[j]);
@@ -98,30 +91,28 @@ export function generateAllocations(subjects: ISubject[]): IAllocation[] {
 
     index = otherIndex;
     otherIndex = (otherIndex + 1) % 2;
-
-
   }
 
-  // create allocations 
+  // create allocations
 
   for (let allocation of allocationList[otherIndex]) {
-    allocations.push({allocation: allocation})
+    allocations.push({ allocation: allocation });
   }
 
   return allocations;
-
 }
 
+// implementation of Fisher-Yates Shuffle
 
-
-// implementation of Fisher-Yates Shuffle 
-
-export function shuffle(allocations: IAllocation[], size?: number ): IAllocation[] {
+export function shuffle(
+  allocations: IAllocation[],
+  size?: number
+): IAllocation[] {
   let length = allocations.length;
 
   let items = length;
 
-  if (typeof(size) !== 'undefined' && size > -1) {
+  if (typeof size !== "undefined" && size > -1) {
     items = Math.min(size, length);
   }
 
@@ -136,50 +127,62 @@ export function shuffle(allocations: IAllocation[], size?: number ): IAllocation
   return allocations.slice(length - items, length);
 }
 
-// 
+//
 
-export function optimise(subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator, algorithm: Ioptimiser): IAllocation[] {
+export function optimise(
+  subjects: ISubject[],
+  preferences: IPreferences,
+  evaluation: Ievaluator,
+  algorithm: Ioptimiser
+): IAllocation[] {
   const allocationCutoff = 10000;
 
   let allocations = generateAllocations(subjects);
 
-  // if there are more allocations than the given cutoff then take 
+  // if there are more allocations than the given cutoff then take
   // a random subject of size allocationCutoff
   if (allocations.length > allocationCutoff) {
     allocations = shuffle(allocations, allocationCutoff);
   }
 
-  // sort and return 
+  // sort and return
 
-  let sortedAllocations = algorithm(allocations, subjects, preferences, evaluation);
+  let sortedAllocations = algorithm(
+    allocations,
+    subjects,
+    preferences,
+    evaluation
+  );
 
   return sortedAllocations;
 }
 
-// Idea is that first we map each allocation to the pair of the allocation and it's score. Then we sort these pairs based on the 
+// Idea is that first we map each allocation to the pair of the allocation and it's score. Then we sort these pairs based on the
 // scores. Then we map the sorted array back to just allocations.
 
-export function sortOptimsation(allocations: IAllocation[], subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator): IAllocation[] {
-  let pairs = allocations.map(x => pair(x, subjects, preferences, evaluation));
-  
-  console.log("One");
-  console.dir(pairs, { depth: null });
+export function sortOptimsation(
+  allocations: IAllocation[],
+  subjects: ISubject[],
+  preferences: IPreferences,
+  evaluation: Ievaluator
+): IAllocation[] {
+  let pairs = allocations.map((x) =>
+    pair(x, subjects, preferences, evaluation)
+  );
 
   pairs.sort((a, b) => a[1] - b[1]);
 
-  console.log("Two");
-  console.dir(pairs, { depth: null });
-
-  let sortedAllocations = pairs.map(a => a[0]);
+  let sortedAllocations = pairs.map((a) => a[0]);
   sortedAllocations.reverse();
-
-  console.log("Three");
-  console.dir(sortedAllocations, { depth: null });
 
   return sortedAllocations;
 }
 
-
-function pair(allocation: IAllocation, subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator): [IAllocation, number] {
+function pair(
+  allocation: IAllocation,
+  subjects: ISubject[],
+  preferences: IPreferences,
+  evaluation: Ievaluator
+): [IAllocation, number] {
   return [allocation, evaluation(subjects, allocation, preferences)];
 }

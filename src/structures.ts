@@ -14,10 +14,10 @@ export enum ActivityType {
 }
 
 // Time, specified in 24-hour time
-export type Time = {hour: number, minute: number};
+export type Time = { hour: number; minute: number };
 
 // // A start and end Time pair
-export type Times = {start: Time, end: Time};
+export type Times = { start: Time; end: Time };
 
 export interface IActivity {
   activity_type: ActivityType;
@@ -129,7 +129,7 @@ export interface ITimetable {
 }
 
 export interface IAllocation {
-  allocation: number[][],
+  allocation: number[][];
 }
 
 // A preference represents the user input - very unrefined
@@ -145,9 +145,18 @@ export interface IPreferences {
 }
 
 export interface Ievaluator {
-  (subjects: ISubject[], allocation: IAllocation, preferences: IPreferences): number;
+  (
+    subjects: ISubject[],
+    allocation: IAllocation,
+    preferences: IPreferences
+  ): number;
 }
 
 export interface Ioptimiser {
-  (allocations: IAllocation[], subjects: ISubject[], preferences: IPreferences, evaluation: Ievaluator): IAllocation[]; 
+  (
+    allocations: IAllocation[],
+    subjects: ISubject[],
+    preferences: IPreferences,
+    evaluation: Ievaluator
+  ): IAllocation[];
 }
