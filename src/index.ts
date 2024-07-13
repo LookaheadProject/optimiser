@@ -7,7 +7,10 @@ import {
   IPreferences
 } from "./structures";
 
-import { optimise } from "./optimiser";
+import { evaluate
+ } from "./evaluate";
+
+import { optimise, sortOptimsation } from "./optimiser";
 
 if (require.main === module) {
   // The following are one example of each of the main structures from the schema
@@ -17,18 +20,19 @@ if (require.main === module) {
   ];
   
   const examplePreferences: IPreferences = {
-    timeRestrictionStart: [8, 30],
-    timeRestrictionEnd: [16, 30],
-    avoidDays: [Day.Fri],
-    minimiseClashes: false,
-    skipLectures: true,
-    cramClasses: false,
-    allocateBreaks: true,
-    streamedClasses: false
+    timeRestriction: {start: {hour: 8, minute: 30}, end: {hour: 8, minute: 30}},
+    avoidDays: [Day.Mon, Day.Tue, Day.Fri],
+    minimiseClashes: true,
+    skipLectures: false,
+    minimiseDaysOnCampus: true,
+    allocateBreaks: 1,
+    minimiseBreaks: true
   }
+
   
-  let optimisedTimetable = optimise(subjects, examplePreferences);
-  
+  let optimisedTimetable = optimise(subjects, examplePreferences, evaluate, sortOptimsation);
+
   // output result with full depth
   console.dir(optimisedTimetable, { depth: null })
+
 }
