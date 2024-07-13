@@ -3,6 +3,7 @@ import {
   IAllocation,
   IPreferences,
   Time,
+  Days,
   Activity,
 } from "./structures";
 
@@ -135,7 +136,9 @@ export function evaluate(
 
           let max_overlap = 0;
 
-          for (let l of activities[activity.day]) {
+          const dayIndex = Days.indexOf(activity.day)
+
+          for (let l of activities[dayIndex]) {
             let startl = l.times.start;
             let endl = l.times.end;
 
@@ -163,9 +166,9 @@ export function evaluate(
 
           // Ordering activites for minimise and allocate breaks
 
-          activities[activity.day].push(activity);
+          activities[dayIndex].push(activity);
 
-          let day_activities = activities[activity.day];
+          let day_activities = activities[dayIndex];
 
           for (let l = day_activities.length - 2; l >= 0; l--) {
             if (timesDifference(day_activities[l].times.start, start) > 0) {
@@ -220,7 +223,7 @@ export function evaluate(
           allocate_break_minutes,
           Math.max(0, timesDifference(cur.times.start, prev.times.end))
         );
-        
+
         minimiseBreaks += minimise_break_length;
         allocateBreaks += allocate_break_length;
 
@@ -239,7 +242,7 @@ export function evaluate(
     let allocate_max_breaks = allocate_break_minutes * activity_count;
     let minimise_max_breaks = minimise_break_minutes * activity_count;
 
-    
+
 
     if (preferences.minimiseBreaks) {
       score += 1 - minimiseBreaks / minimise_max_breaks;
@@ -336,6 +339,7 @@ export function minimiseClashesEval(
 
       for (let k = 0; k < stream.activity_list.length; k++) {
         let activity = stream.activity_list[k];
+        const dayIndex = Days.indexOf(activity.day);
 
         // only record if activity is tutorial or we don't skip tutorials
         if (activity.activity_type || !preference.skipLectures) {
@@ -347,8 +351,7 @@ export function minimiseClashesEval(
           let max_overlap = 0;
 
           // iterate through all activities in the activity day
-
-          for (let l of activities[activity.day]) {
+          for (let l of activities[dayIndex]) {
             let startl = l.times.start;
             let endl = l.times.end;
 
@@ -369,7 +372,7 @@ export function minimiseClashesEval(
             }
           }
 
-          activities[activity.day].push(activity);
+          activities[dayIndex].push(activity);
 
           total_overlap = total_overlap + max_overlap;
         }
@@ -415,7 +418,7 @@ export function minimiseClashesEvalOld(
 
           // activity minute_block start index and duration
           let start =
-            day_blocks * activity.day +
+            day_blocks * Days.indexOf(activity.day) +
             hour_blocks * activity.times.start.hour +
             activity.times.start.minute;
           let duration =
@@ -499,7 +502,7 @@ export function minimiseBreaksEval(
         if (activity.activity_type || !preference.skipLectures) {
           activity_count = activity_count + 1;
 
-          let day_activities = activities[activity.day];
+          let day_activities = activities[Days.indexOf(activity.day)];
 
           day_activities.push(activity);
 
@@ -592,7 +595,7 @@ export function minimiseBreaksEvalOld(
 
           // activity minute_block start index and duration
           let start =
-            day_blocks * activity.day +
+            day_blocks * Days.indexOf(activity.day) +
             hour_blocks * activity.times.start.hour +
             activity.times.start.minute;
           let duration =
@@ -653,7 +656,7 @@ export function allocateBreaksEval(
         if (activity.activity_type || !preference.skipLectures) {
           activity_count = activity_count + 1;
 
-          let day_activities = activities[activity.day];
+          let day_activities = activities[Days.indexOf(activity.day)];
 
           day_activities.push(activity);
 
@@ -746,7 +749,7 @@ export function allocateBreaksEvalOld(
 
           // activity minute_block start index and duration
           let start =
-            day_blocks * activity.day +
+            day_blocks * Days.indexOf(activity.day) +
             hour_blocks * activity.times.start.hour +
             activity.times.start.minute;
           let duration =
