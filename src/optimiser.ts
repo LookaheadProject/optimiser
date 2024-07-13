@@ -1,6 +1,6 @@
 import {
-  Ioptimiser,
-  Ievaluator,
+  Optimiser,
+  Evaluator,
   ISubject,
   IAllocation,
   IPreferences,
@@ -132,8 +132,8 @@ export function shuffle(
 export function optimise(
   subjects: ISubject[],
   preferences: IPreferences,
-  evaluation: Ievaluator,
-  algorithm: Ioptimiser
+  evaluation: Evaluator,
+  algorithm: Optimiser
 ): IAllocation[] {
   const allocationCutoff = 10000;
 
@@ -164,7 +164,7 @@ export function sortOptimsation(
   allocations: IAllocation[],
   subjects: ISubject[],
   preferences: IPreferences,
-  evaluation: Ievaluator
+  evaluation: Evaluator
 ): IAllocation[] {
   let pairs = allocations.map((x) =>
     pair(x, subjects, preferences, evaluation)
@@ -182,7 +182,7 @@ function pair(
   allocation: IAllocation,
   subjects: ISubject[],
   preferences: IPreferences,
-  evaluation: Ievaluator
+  evaluation: Evaluator
 ): [IAllocation, number] {
   return [allocation, evaluation(subjects, allocation, preferences)];
 }

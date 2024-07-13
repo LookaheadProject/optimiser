@@ -75,8 +75,8 @@ export function evaluate(
   preferences: IPreferences
 ): number {
   // first check if score for this allocation has been stored in cache
-
-  const break_minutes = 60;
+  const minimise_break_minutes = 60;
+  const allocate_break_minutes = preferences.allocateBreaks;
 
   let activities: Activity[][] = [[], [], [], [], [], [], []];
   let total_overlap = 0;
@@ -200,6 +200,8 @@ export function evaluate(
 
   if (preferences.minimiseBreaks || preferences.allocateBreaks) {
     let breaks = 0;
+    let minimiseBreaks = 0;
+    let allocateBreaks = 0;
 
     for (let i = 0; i < 7; i++) {
       let day_activities = activities[i];
@@ -209,12 +211,20 @@ export function evaluate(
       for (let j = 1; j < day_activities.length; j++) {
         let cur = day_activities[j];
 
-        let break_length = Math.min(
-          break_minutes,
+        let minimise_break_length = Math.min(
+          minimise_break_minutes,
           Math.max(0, timesDifference(cur.times.start, prev.times.end))
         );
 
-        breaks = breaks + break_length;
+        let allocate_break_length = Math.min(
+          allocate_break_minutes,
+          Math.max(0, timesDifference(cur.times.start, prev.times.end))
+        );
+        
+        minimiseBreaks += minimise_break_length;
+        allocateBreaks += allocate_break_length;
+
+
 
         if (timesDifference(prev.times.end, cur.times.end) < 0) {
           prev = cur;
@@ -223,17 +233,21 @@ export function evaluate(
     }
 
     // normalise values
-    breaks = breaks + break_minutes * days_present;
+    allocateBreaks += allocate_break_minutes * days_present;
+    minimiseBreaks += minimise_break_minutes * days_present;
 
-    let max_breaks = break_minutes * activity_count;
+    let allocate_max_breaks = allocate_break_minutes * activity_count;
+    let minimise_max_breaks = minimise_break_minutes * activity_count;
+
+    
 
     if (preferences.minimiseBreaks) {
-      score += 1 - breaks / max_breaks;
+      score += 1 - minimiseBreaks / minimise_max_breaks;
       evalContributors++;
     }
 
     if (preferences.allocateBreaks) {
-      score += breaks / max_breaks;
+      score += allocateBreaks / allocate_max_breaks;
       evalContributors++;
     }
   }
@@ -619,7 +633,7 @@ export function allocateBreaksEval(
   allocation: IAllocation,
   preference: IPreferences
 ): number {
-  const break_minutes = 60;
+  const break_minutes = 60 * preference.allocateBreaks;
 
   let activities: Activity[][] = [[], [], [], [], [], [], []];
   let days = Array<number>(7).fill(0);

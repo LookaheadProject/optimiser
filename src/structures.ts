@@ -140,11 +140,11 @@ export interface IPreferences {
   minimiseClashes: boolean;
   skipLectures: boolean;
   minimiseDaysOnCampus: boolean;
-  allocateBreaks: boolean;
+  allocateBreaks: number;
   minimiseBreaks: boolean;
 }
 
-export interface Ievaluator {
+export interface Evaluator {
   (
     subjects: ISubject[],
     allocation: IAllocation,
@@ -152,11 +152,11 @@ export interface Ievaluator {
   ): number;
 }
 
-export interface Ioptimiser {
+export interface Optimiser {
   (
     allocations: IAllocation[],
     subjects: ISubject[],
     preferences: IPreferences,
-    evaluation: Ievaluator
+    evaluation: Evaluator
   ): IAllocation[];
 }
