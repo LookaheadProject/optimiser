@@ -1,5 +1,6 @@
 export * from "./structures";
 export * from "./optimiser";
+export * from "./evaluate";
 
 import {
   Day,
