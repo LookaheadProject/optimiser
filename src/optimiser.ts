@@ -135,6 +135,22 @@ export function optimise(
   evaluation: Evaluator,
   algorithm: Optimiser
 ): IAllocation[] {
+  // make a modification to ISubject to match the required format
+  const subjects_modif = JSON.parse(JSON.stringify(subjects)) as any;
+  for (let subj of subjects_modif) {
+    for (let act_group of subj.activity_group_list) {
+      for (let stream of act_group.stream_list) {
+        for (let activity of stream.activity_list) {
+          const t_start = activity.times.start.split(":").map(x => parseInt(x, 10));
+          const t_end = activity.times.end.split(":").map(x => parseInt(x, 10));
+
+          activity.times.start = { hour: t_start[0], minute: t_start[1] };
+          activity.times.end = { hour: t_end[0], minute: t_end[1] };
+        }
+      }
+    }
+  }
+
   const allocationCutoff = 10000;
 
   let allocations = generateAllocations(subjects);
@@ -149,7 +165,7 @@ export function optimise(
 
   let sortedAllocations = algorithm(
     allocations,
-    subjects,
+    subjects_modif,
     preferences,
     evaluation
   );
@@ -171,8 +187,9 @@ export function sortOptimsation(
   );
 
   pairs.sort((a, b) => a[1] - b[1]);
+  console.log("Sorted");
 
-  let sortedAllocations = pairs.map((a) => a[0]);
+  let sortedAllocations = pairs.map((a) => ({ ...a[0], score: a[1] }));
   sortedAllocations.reverse();
 
   return sortedAllocations;
