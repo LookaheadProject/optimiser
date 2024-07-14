@@ -1,0 +1,708 @@
+{
+	"code": "MAST20026",
+	"name": "Real Analysis",
+	"year": 2024,
+	"offering": "Semester 2",
+	"activity_group_list": [
+		{
+			"name": "Lecture1",
+			"group_id": 0,
+			"stream_list": [
+				{
+					"stream_id": 0,
+					"activity_list": [
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "13:00:00",
+								"end": "14:00:00"
+							},
+							"location": "PAR-134-G-G06-G06 Theatre (208)"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lecture2",
+			"group_id": 1,
+			"stream_list": [
+				{
+					"stream_id": 0,
+					"activity_list": [
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "13:00:00",
+								"end": "14:00:00"
+							},
+							"location": "PAR-134-G-G06-G06 Theatre (208)"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lecture3",
+			"group_id": 2,
+			"stream_list": [
+				{
+					"stream_id": 0,
+					"activity_list": [
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 3",
+							"activity_id": 0,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-115-L1-101-Lyle Theatre (253)"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Practical1",
+			"group_id": 3,
+			"stream_list": [
+				{
+					"stream_id": 0,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-192-L2-208-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 1,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-153-L1-156-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 2,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-153-L1-156-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 3,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-192-L2-206-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 4,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "09:00:00",
+								"end": "10:00:00"
+							},
+							"location": "PAR-153-L1-156-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 5,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "13:00:00",
+								"end": "14:00:00"
+							},
+							"location": "PAR-192-L2-209-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 6,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-192-L2-206-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 7,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-192-L2-206-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 8,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-192-L2-208-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 9,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-153-L1-156-Stand-Up Learning Space (20)"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Practical2",
+			"group_id": 4,
+			"stream_list": [
+				{
+					"stream_id": 0,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "09:00:00",
+								"end": "10:00:00"
+							},
+							"location": "PAR-153-L1-156-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 1,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-192-L2-208-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 2,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-192-L2-206-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 3,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "13:00:00",
+								"end": "14:00:00"
+							},
+							"location": "PAR-192-L2-206-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 4,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G09-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 5,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-192-L2-206-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 6,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-160-G-G09-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 7,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "09:00:00",
+								"end": "10:00:00"
+							},
+							"location": "PAR-160-G-G09-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 8,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-192-L2-206-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 9,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-192-L2-208-Stand-Up Learning Space (20)"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,160 +1,1452 @@
 {
-  "code": "MAST20005",
-  "name": "Statistics",
-  "year": 2024,
-  "offering": "Semester 2",
-  "activity_group_list": [
-    {
-      "name": "Lecture",
-      "group_id": 1,
-      "stream_list": [
-      	{
-      		"stream_id": 1,
-      		"activity_list": [
-      			{
-      				"activity_type": "Lecture Recording",
-      				"name": "Lecture 1",
-      				"activity_id": 1,
-              "weeks": [],
-              "day": "Mon",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G01-JH Michell Theatre (308)"
-      			},
-      			{
-      				"activity_type": "Lecture Recording",
-      				"name": "Lecture 2",
-      				"activity_id": 2,
-              "weeks": [],
-              "day": "Wed",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G01-JH Michell Theatre (308)"
-      			},
-      			{
-      				"activity_type": "Lecture Recording",
-      				"name": "Lecture 3",
-      				"activity_id": 3,
-              "weeks": [],
-              "day": "Wed",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G01-JH Michell Theatre (308)"
-      			}
-      		]
-      	},
-      	{
-      		"stream_id": 2,
-      		"activity_list": [
-      			{
-      				"activity_type": "Lecture Recording",
-      				"name": "Lecture 1",
-      				"activity_id": 1,
-              "weeks": [],
-              "day": "Mon",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G01-JH Michell Theatre (308)"
-      			},
-      			{
-      				"activity_type": "Lecture Recording",
-      				"name": "Lecture 2",
-      				"activity_id": 2,
-              "weeks": [],
-              "day": "Wed",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G01-JH Michell Theatre (308)"
-      			},
-      			{
-      				"activity_type": "Lecture Recording",
-      				"name": "Lecture 3",
-      				"activity_id": 3,
-              "weeks": [],
-              "day": "Wed",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G01-JH Michell Theatre (308)"
-      			}
-      		]
-      	}
-      ]
-    },
-    {
-      "name": "Prac-ComputerLab",
-      "group_id": 2,
-      "stream_list": [
-      	{
-      		"stream_id": 1,
-      		"activity_list": [
-      			{
-      				"activity_type": "Practical",
-      				"name": "Practical 1",
-      				"activity_id": 1,
-              "weeks": [],
-              "day": "Mon",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
-      			},
-      			{
-      				"activity_type": "Practical",
-      				"name": "Practical 2",
-      				"activity_id": 2,
-              "weeks": [],
-              "day": "Mon",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
-      			}
-      		]
-      	},
-      	{
-      		"stream_id": 2,
-      		"activity_list": [
-      			{
-      				"activity_type": "Practical",
-      				"name": "Practical 1",
-      				"activity_id": 1,
-              "weeks": [],
-              "day": "Mon",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
-      			},
-      			{
-      				"activity_type": "Practical",
-      				"name": "Practical 2",
-      				"activity_id": 2,
-              "weeks": [],
-              "day": "Mon",
-              "times": {
-                "start": "00:00:00",
-                "end": "00:00:00"
-              },
-              "location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
-      			}
-      		]
-      	}
-      ]
-    }
-  ]
+	"code": "MAST20005",
+	"name": "Statistics",
+	"year": 2024,
+	"offering": "Semester 2",
+	"activity_group_list": [
+		{
+			"name": "Lecture",
+			"group_id": 0,
+			"stream_list": [
+				{
+					"stream_id": 0,
+					"activity_list": [
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G01-JH Michell Theatre (308)"
+						},
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G01-JH Michell Theatre (308)"
+						},
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 3",
+							"activity_id": 2,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G01-JH Michell Theatre (308)"
+						}
+					]
+				},
+				{
+					"stream_id": 1,
+					"activity_list": [
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "13:00:00",
+								"end": "14:00:00"
+							},
+							"location": "PAR-160-G-G01-JH Michell Theatre (308)"
+						},
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G01-JH Michell Theatre (308)"
+						},
+						{
+							"activity_type": "Lecture Recording",
+							"name": "Lecture 3",
+							"activity_id": 2,
+							"weeks": [
+								"Week 1",
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G01-JH Michell Theatre (308)"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Prac-ComputerLab",
+			"group_id": 1,
+			"stream_list": [
+				{
+					"stream_id": 0,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "09:00:00",
+								"end": "10:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 1,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 2,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 3,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 4,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "09:00:00",
+								"end": "10:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 5,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 6,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "17:15:00",
+								"end": "18:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 7,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 8,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "13:00:00",
+								"end": "14:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 9,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 10,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "17:15:00",
+								"end": "18:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 11,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "09:00:00",
+								"end": "10:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 12,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 13,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "13:15:00",
+								"end": "14:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 14,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Thu",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 15,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "09:00:00",
+								"end": "10:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "10:00:00",
+								"end": "11:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 16,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 17,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "13:15:00",
+								"end": "14:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G11-Stand-Up Learning Space (24)"
+						}
+					]
+				},
+				{
+					"stream_id": 18,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "11:00:00",
+								"end": "12:00:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "12:00:00",
+								"end": "13:00:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 19,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "13:15:00",
+								"end": "14:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 20,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Mon",
+							"times": {
+								"start": "17:15:00",
+								"end": "18:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 21,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Tue",
+							"times": {
+								"start": "16:15:00",
+								"end": "17:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 22,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "13:15:00",
+								"end": "14:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Wed",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						}
+					]
+				},
+				{
+					"stream_id": 23,
+					"activity_list": [
+						{
+							"activity_type": "Practical",
+							"name": "Practical 1",
+							"activity_id": 0,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "14:15:00",
+								"end": "15:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						},
+						{
+							"activity_type": "Practical",
+							"name": "Practical 2",
+							"activity_id": 1,
+							"weeks": [
+								"Week 2",
+								"Week 3",
+								"Week 4",
+								"Week 5",
+								"Week 6",
+								"Week 7",
+								"Week 8",
+								"Week 9",
+								"Week 10",
+								"Week 11",
+								"Week 12"
+							],
+							"day": "Fri",
+							"times": {
+								"start": "15:15:00",
+								"end": "16:15:00"
+							},
+							"location": "PAR-160-G-G14-Stand-Up Learning Space (20)"
+						}
+					]
+				}
+			]
+		}
+	]
 }
