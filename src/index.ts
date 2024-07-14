@@ -19,23 +19,24 @@ if (require.main === module) {
   // The following are one example of each of the main structures from the schema
 
   const subjects: ISubject[] = [
-    require("./example_subject_MAST20005.json")
+    require("./example_subject_MAST20005.json"),
+    require("./example_subject_MAST20026.json")
   ];
 
   const examplePreferences: IPreferences = {
-    timeRestriction: { start: { hour: 8, minute: 30 }, end: { hour: 8, minute: 30 } },
-    avoidDays: [Days.indexOf(Day.Mon), Days.indexOf(Day.Tue), Days.indexOf(Day.Fri)],
+    timeRestriction: { start: { hour: 8, minute: 30 }, end: { hour: 22, minute: 0 } },
+    avoidDays: [Days.indexOf(Day.Mon), Days.indexOf(Day.Tue)],
     minimiseClashes: true,
     skipLectures: false,
-    minimiseDaysOnCampus: true,
-    allocateBreaks: 1,
-    minimiseBreaks: true
+    minimiseDaysOnCampus: false,
+    allocateBreaks: 0,
+    minimiseBreaks: false
   }
 
 
   let optimisedTimetable = optimise(subjects, examplePreferences, evaluate, sortOptimsation);
 
   // output result with full depth
-  console.dir(optimisedTimetable, { depth: null })
+  console.dir(optimisedTimetable.slice(0, 10), { depth: null })
 
 }
