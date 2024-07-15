@@ -1,3 +1,4 @@
+import { start } from "repl";
 import {
   ISubject,
   IAllocation,
@@ -9,7 +10,7 @@ import {
 
 // returns number of hours time1 is after time2
 function timesDifference(time1: Time, time2: Time): number {
-  return time1.hour - time2.hour + (time2.minute - time1.minute) / 60;
+  return time1.hour - time2.hour + (time1.minute - time2.minute) / 60;
 }
 
 // Transform a allocation into a unique string representing the allocation
@@ -106,7 +107,7 @@ export function evaluate(
           activity_count = activity_count + 1;
 
           // record which days activities occur
-          days[stream.activity_list[k].day] = 1;
+          days[Days.indexOf(stream.activity_list[k].day)] = 1;
 
           // find the maximum deviation of the class from time restrictions.
           let activity_start = activity.times.start;
@@ -234,15 +235,13 @@ export function evaluate(
         }
       }
     }
-
+    
     // normalise values
     allocateBreaks += allocate_break_minutes * days_present;
     minimiseBreaks += minimise_break_minutes * days_present;
 
     let allocate_max_breaks = allocate_break_minutes * activity_count;
     let minimise_max_breaks = minimise_break_minutes * activity_count;
-
-
 
     if (preferences.minimiseBreaks) {
       score += 1 - minimiseBreaks / minimise_max_breaks;
@@ -267,22 +266,23 @@ export function evaluate(
     preferences.timeRestriction.end
   );
   let max_deviation = Math.max(start_deviation, end_deviation);
+  
 
   if (max_deviation == 0) {
     score += 1;
   } else {
     score += 1 - restrictionScore / (activity_count * max_deviation ** 2);
   }
-
+  
   // adding avoidDays score
   score = score + 1;
 
   let day_weight = 1 / preferences.avoidDays.length;
-
+  
   for (let day of preferences.avoidDays) {
     score -= day_weight * days[day];
   }
-
+  
   return score / evalContributors;
 }
 
