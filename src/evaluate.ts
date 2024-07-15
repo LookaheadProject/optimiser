@@ -107,7 +107,7 @@ export function evaluate(
           activity_count = activity_count + 1;
 
           // record which days activities occur
-          days[Days.indexOf(stream.activity_list[k].day)] = 1;
+          days[Days.indexOf(stream.activity_list[k].day)] += 1;
 
           // find the maximum deviation of the class from time restrictions.
           let activity_start = activity.times.start;
@@ -277,10 +277,12 @@ export function evaluate(
   // adding avoidDays score
   score = score + 1;
 
-  let day_weight = 1 / preferences.avoidDays.length;
+  let class_weight = 1 / activity_count; 
+  
+  // day_weight = 1 / preferences.avoidDays.length;
   
   for (let day of preferences.avoidDays) {
-    score -= day_weight * days[day];
+    score -= class_weight * days[day];
   }
   
   return score / evalContributors;
@@ -647,6 +649,7 @@ export function avoidDaysEval(
 ): number {
   let score = 1;
   let days = Array<number>(5).fill(0);
+  let activity_count = 0;
 
   for (let i = 0; i < subjects.length; i++) {
     let subject = subjects[i];
@@ -661,17 +664,20 @@ export function avoidDaysEval(
 
         // if the class is a tutorial or we don't skip lectures then record the day
         if (stream.activity_list[k].activity_type || !preference.skipLectures) {
+
+          activity_count += 1;
+
           // record which days activities occur
-          days[stream.activity_list[k].day] = 1;
+          days[stream.activity_list[k].day] += 1;
         }
       }
     }
   }
 
-  let day_weight = 1 / preference.avoidDays.length;
+  let class_weight = 1 / activity_count;
 
   for (let day of preference.avoidDays) {
-    score -= day_weight * days[day];
+    score -= class_weight * days[day];
   }
 
   return score;
