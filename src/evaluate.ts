@@ -78,7 +78,9 @@ export function evaluate(
 ): number {
   // first check if score for this allocation has been stored in cache
   const minimise_break_minutes = 60;
-  const allocate_break_minutes = preferences.allocateBreaks;
+  const allocate_break_minutes = 60 * preferences.allocateBreaks;
+  const initial_penalisation = 1;
+  const subsequent_penalisation = 0.5;
 
   let activities: Activity[][] = [[], [], [], [], [], [], []];
   let total_overlap = 0;
@@ -137,7 +139,7 @@ export function evaluate(
 
           let max_overlap = 0;
 
-          const dayIndex = Days.indexOf(activity.day)
+          const dayIndex = Days.indexOf(activity.day);
 
           for (let l of activities[dayIndex]) {
             let startl = l.times.start;
@@ -228,14 +230,12 @@ export function evaluate(
         minimiseBreaks += minimise_break_length;
         allocateBreaks += allocate_break_length;
 
-
-
         if (timesDifference(prev.times.end, cur.times.end) < 0) {
           prev = cur;
         }
       }
     }
-    
+
     // normalise values
     allocateBreaks += allocate_break_minutes * days_present;
     minimiseBreaks += minimise_break_minutes * days_present;
@@ -266,25 +266,32 @@ export function evaluate(
     preferences.timeRestriction.end
   );
   let max_deviation = Math.max(start_deviation, end_deviation);
-  
 
   if (max_deviation == 0) {
     score += 1;
   } else {
     score += 1 - restrictionScore / (activity_count * max_deviation ** 2);
   }
-  
-  // adding avoidDays score
-  score = score + 1;
 
-  let class_weight = 1 / activity_count; 
-  
-  // day_weight = 1 / preferences.avoidDays.length;
-  
+  // adding avoidDays score
+  let sub_score = 0;
+
+  let maximum_penalisation =
+    initial_penalisation *
+      Math.min(activity_count, preferences.avoidDays.length) +
+    subsequent_penalisation *
+      Math.max(0, activity_count - preferences.avoidDays.length);
+
   for (let day of preferences.avoidDays) {
-    score -= class_weight * days[day];
+    if (days[day] > 0) {
+      sub_score += initial_penalisation;
+    }
+
+    if (days[day] > 1) {
+      sub_score += subsequent_penalisation * (days[day] - 1);
+    }
   }
-  
+  score += sub_score / maximum_penalisation;
   return score / evalContributors;
 }
 
@@ -647,6 +654,8 @@ export function avoidDaysEval(
   allocation: IAllocation,
   preference: IPreferences
 ): number {
+  const initial_penalisation = 1;
+  const subsequent_penalisation = 0.5;
   let score = 1;
   let days = Array<number>(5).fill(0);
   let activity_count = 0;
@@ -664,7 +673,6 @@ export function avoidDaysEval(
 
         // if the class is a tutorial or we don't skip lectures then record the day
         if (stream.activity_list[k].activity_type || !preference.skipLectures) {
-
           activity_count += 1;
 
           // record which days activities occur
@@ -674,11 +682,21 @@ export function avoidDaysEval(
     }
   }
 
-  let class_weight = 1 / activity_count;
+  let maximum_penalisation =
+    initial_penalisation *
+      Math.min(activity_count, preference.avoidDays.length) +
+    subsequent_penalisation *
+      Math.max(0, activity_count - preference.avoidDays.length);
 
   for (let day of preference.avoidDays) {
-    score -= class_weight * days[day];
+    if (days[day] > 0) {
+      score += initial_penalisation;
+    }
+
+    if (days[day] > 1) {
+      score += subsequent_penalisation * (days[day] - 1);
+    }
   }
 
-  return score;
+  return 1 - score / maximum_penalisation;
 }
