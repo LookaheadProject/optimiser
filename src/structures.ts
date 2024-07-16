@@ -12,9 +12,11 @@ export enum Day {
 export const Days = [Day.Mon, Day.Tue, Day.Wed, Day.Thu, Day.Fri, Day.Sat, Day.Fri];
 
 export enum ActivityType {
-  Lecture,
-  Tutorial,
+  Lecture = "Lecture Recording",
+  Tutorial = "Practical",
 }
+
+export const ActivityTypes = [ActivityType.Lecture, ActivityType.Tutorial];
 
 // Time, specified in 24-hour time
 export type Time = { hour: number; minute: number };

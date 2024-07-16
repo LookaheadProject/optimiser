@@ -6,6 +6,7 @@ import {
   Time,
   Days,
   Activity,
+  ActivityTypes
 } from "./structures";
 
 // returns number of hours time1 is after time2
@@ -104,7 +105,7 @@ export function evaluate(
         let activity = stream.activity_list[k];
 
         // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preferences.skipLectures) {
+        if (ActivityTypes.indexOf(activity.activity_type) || !preferences.skipLectures) {
           // record the number of activities processes for normalisation
           activity_count = activity_count + 1;
 
@@ -276,6 +277,10 @@ export function evaluate(
   // adding avoidDays score
   let sub_score = 0;
 
+  console.log("Score");
+  console.log(score);
+  console.log(activity_count);
+
   let maximum_penalisation =
     initial_penalisation *
       Math.min(activity_count, preferences.avoidDays.length) +
@@ -351,7 +356,7 @@ export function minimiseClashesEval(
         const dayIndex = Days.indexOf(activity.day);
 
         // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preference.skipLectures) {
+        if (ActivityTypes.indexOf(activity.activity_type) || !preference.skipLectures) {
           let start = activity.times.start;
           let end = activity.times.end;
 
@@ -409,7 +414,7 @@ export function minimiseDaysOnCampusEval(
 
       for (let k = 0; k < stream.activity_list.length; k++) {
         // only record if activity is tutorial or we don't skip tutorials
-        if (stream.activity_list[k].activity_type || !preference.skipLectures) {
+        if (ActivityTypes.indexOf(stream.activity_list[k].activity_type) || !preference.skipLectures) {
           days[stream.activity_list[k].day] = 1;
         }
       }
@@ -445,7 +450,7 @@ export function minimiseBreaksEval(
         let activity = stream.activity_list[k];
 
         // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preference.skipLectures) {
+        if (ActivityTypes.indexOf(activity.activity_type) || !preference.skipLectures) {
           activity_count = activity_count + 1;
 
           let day_activities = activities[Days.indexOf(activity.day)];
@@ -528,7 +533,7 @@ export function allocateBreaksEval(
         let activity = stream.activity_list[k];
 
         // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preference.skipLectures) {
+        if (ActivityTypes.indexOf(activity.activity_type) || !preference.skipLectures) {
           activity_count = activity_count + 1;
 
           let day_activities = activities[Days.indexOf(activity.day)];
@@ -608,7 +613,7 @@ export function timeRestrictionEval(
         let activity = stream.activity_list[k];
 
         // only record if activity is tutorial or we don't skip tutorials
-        if (activity.activity_type || !preference.skipLectures) {
+        if (ActivityTypes.indexOf(activity.activity_type) || !preference.skipLectures) {
           activity_count = activity_count + 1;
 
           // find the maximum deviation of the class from time restrictions.
@@ -672,7 +677,7 @@ export function avoidDaysEval(
         // set record which day the activity is on
 
         // if the class is a tutorial or we don't skip lectures then record the day
-        if (stream.activity_list[k].activity_type || !preference.skipLectures) {
+        if (ActivityTypes.indexOf(stream.activity_list[k].activity_type) || !preference.skipLectures) {
           activity_count += 1;
 
           // record which days activities occur
